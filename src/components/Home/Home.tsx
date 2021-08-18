@@ -1,10 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, createStyles, Theme, useTheme, Typography } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import bg_image from '../../assets/images/index-bg-top.jpg';
 import cornericon from '../../assets/images/ironmanicon.png';
 import {flexbox} from '@material-ui/system';
-import { Link } from 'react-router-dom';
+import { Link, RouteComponentProps, withRouter, Switch, Route } from 'react-router-dom'; 
+import Paper from '@material-ui/core/Paper'
 
 interface Props{
     title: string;
@@ -21,14 +22,12 @@ export const Home = ( props:Props) => {
             <nav>
                 <div className={classes.navbar_container}>
                     <ul className={ `${classes.navigation} ${classes.logo_navigation}` }>
+                        
                         <li>
-                            <Link to="/" className={classes.nav_a}>Home</Link>
+                            <Link to="/dashboard" className={classes.nav_a} id="repo">The Repo</Link>
                         </li>
                         <li>
-                            <Link to="/dashboard" className={classes.nav_a}>About</Link>
-                        </li>
-                        <li>
-                            <Link to="/signin" className={classes.nav_a}>Learn More</Link>
+                            <Link to="/signin" className={classes.nav_a}><b>Sign In</b></Link>
                         </li>
                     </ul>
                 </div>
@@ -44,55 +43,63 @@ export const Home = ( props:Props) => {
     )
 }
 
-const useStyles = makeStyles({
-    root:{
-        padding: '0',
-        margin: '0'
-    },
-    navbar_container: {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        backgroundColor: '#55d394',
-    },
-    logo:{
-        margin: '0 0 0 0.45em'
-    },
-    logo_a: {
-        color: 'rgb(28,24,22)'
-    },
-    logo_navigation: {
-        listStyle: 'none',
-        textTransform: 'uppercase',
-        textDecoration: 'none'
-    },
-    navigation: {
-        display: 'flex'
-    },
-    nav_a:{
-        display: 'block',
-        padding: '0.5em',
-        color: 'black',
-        textDecoration: 'none',
-        fontSize: '1.5rem'
-    },
-    main: {
-        backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${bg_image});`,
-        width: '100%',
-        height: '100%',
-        backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'center',
-        position: 'absolute',
-    },
-    main_text:{
-        textAlign: 'center',
-        position: 'relative',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -260%)',
-        color: '#ffc299'
-    }
-    
-})
+const useStyles = makeStyles((theme:Theme) => 
+    createStyles({
+        root:{
+            padding: '0',
+            margin: '0'
+        },
+        navbar_container: {
+            display: 'flex',
+            minWidth: '100%',
+            alignItems: 'center',
+            backgroundColor: '#2d3339',
+            maxHeight: '3.5rem'
+        },
 
+        logo:{
+            margin: '0'
+        },
+        logo_a: {
+            color: 'rgb(28,24,22)',
+        },
+        logo_navigation: {
+            listStyle: 'none',
+            textTransform: 'uppercase',
+            textDecoration: 'none',
+            marginLeft: 'auto',
+            marginRight: '0.8rem',
+            marginInlineEnd: '2rem'
+        },
+        navigation: {
+            display: 'flex'
+        },
+        nav_a:{
+            display: 'block',
+            marginRight: '1 rem',
+            color: 'white',
+            textDecoration: 'none',
+            fontSize: '1.2rem',
+            padding: '0.6rem'
+        },
+
+        main: {
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 1.0)), url(${bg_image});`,
+            width: '100%',
+            height: '100%',
+            backgroundSize: 'cover',
+            backgroundRepeat: 'no-repeat',
+            position: 'absolute',
+        },
+        main_text:{
+            textAlign: 'center',
+            position: 'relative',
+            top: '20%',
+            left: '50%',
+            transform: 'translate(-50%, -20%)',
+            color: 'white',
+            fontSize: '2.5rem'
+        }
+        
+    })
+)
