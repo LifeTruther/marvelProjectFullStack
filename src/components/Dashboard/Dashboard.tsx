@@ -31,6 +31,7 @@ import clsx from 'clsx';
 import { Link, RouteComponentProps, withRouter, Switch, Route } from 'react-router-dom';
 import {DataTable, HeroForm} from '../../components';
 import { render } from '@testing-library/react';
+import { useAuth } from 'reactfire';
 
 // drawer styling and methods to open/close.
 const drawerWidth = 240;
@@ -131,6 +132,8 @@ export const Dashboard = withRouter((props:DashProps) => {
     const handleDialogClickOpen = () => {
         setDialogOpen(true);
     };
+
+    const auth = useAuth();
     
     const handleDialogClickClose = () => {
         setDialogOpen(false);
@@ -144,7 +147,9 @@ export const Dashboard = withRouter((props:DashProps) => {
         },
         {
             text: 'Sign Out',
-            onClick: () => history.push('/signout')
+            onClick: async () => {
+                await auth.signOut();
+                history.push('/')}
         }
     ];
 

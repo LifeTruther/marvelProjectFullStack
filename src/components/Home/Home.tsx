@@ -6,7 +6,7 @@ import cornericon from '../../assets/images/ironmanicon.png';
 import {flexbox} from '@material-ui/system';
 import { Link, RouteComponentProps, withRouter, Switch, Route } from 'react-router-dom'; 
 import Paper from '@material-ui/core/Paper';
-import { AuthCheck } from 'reactfire';
+import { AuthCheck, useAuth } from 'reactfire';
 
 interface Props{
     title: string;
