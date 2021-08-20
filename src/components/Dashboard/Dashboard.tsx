@@ -15,14 +15,22 @@ import {
     Typography,
     Divider,
     Button,
-    CssBaseline
+    CssBaseline,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    Container,
+    Input
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import clsx from 'clsx';
 import { Link, RouteComponentProps, withRouter, Switch, Route } from 'react-router-dom';
-import {DataTable} from '../../components';
+import {DataTable, HeroForm} from '../../components';
+import { render } from '@testing-library/react';
 
 // drawer styling and methods to open/close.
 const drawerWidth = 240;
@@ -84,7 +92,7 @@ const useStyles = makeStyles((theme:Theme) =>
         },
         toolbar: {
             display: 'flex',
-            backgroundColor: '#336600',
+            backgroundColor: 'black',
             color: 'white',
         },
         toolbar_button: {
@@ -92,7 +100,7 @@ const useStyles = makeStyles((theme:Theme) =>
             textDecoration: 'none',
             fontSize: '1.2rem',
             color: 'white'
-        }
+        },
     })
 );
 
@@ -102,6 +110,8 @@ interface DashProps{
     match: RouteComponentProps["match"];
 };
 
+
+
 export const Dashboard = withRouter((props:DashProps) => {
     
     const {history} = props
@@ -109,6 +119,7 @@ export const Dashboard = withRouter((props:DashProps) => {
     const theme = useTheme();
     // Usestate hook
     const [open, setOpen] = useState(false);
+    const [dialogOpen, setDialogOpen] = useState(false);
     
     // functions to set state of 'open'
     const handleDrawerOpen = () =>{
@@ -116,6 +127,13 @@ export const Dashboard = withRouter((props:DashProps) => {
     };
     const handleDrawerClose = () =>{
         setOpen(false);
+    };
+    const handleDialogClickOpen = () => {
+        setDialogOpen(true);
+    };
+    
+    const handleDialogClickClose = () => {
+        setDialogOpen(false);
     };
 
     // placeholder item-names
@@ -125,12 +143,14 @@ export const Dashboard = withRouter((props:DashProps) => {
             onClick: () => history.push('/')
         },
         {
-            text: 'Sign In',
-            onClick: () => history.push('/signin')
+            text: 'Sign Out',
+            onClick: () => history.push('/signout')
         }
     ];
-    // returning the Dashboard:
 
+    // const userToken = "token"
+
+    // returning the Dashboard:
 
     return (
         <div className={classes.root}>
@@ -149,8 +169,21 @@ export const Dashboard = withRouter((props:DashProps) => {
                     className={clsx(classes.menuButton, open && classes.hide)}>
                     <MenuIcon/>
                     </IconButton>
-                    <Typography variant="h5" noWrap>Dashboard</Typography>
-                    <Link to="/" className={classes.toolbar_button}><Button className={classes.toolbar_button}>Home</Button></Link>
+                    <Typography variant="h5" noWrap>The Repository</Typography>
+                    <Button className={classes.toolbar_button} onClick={handleDialogClickOpen}>Create Your Hero!</Button>
+                        {/*Dialog Pop Up begin */}
+                        <Dialog open={dialogOpen} onClose={handleDialogClickClose} aria-labelledby="form-dialog-title">
+                        <DialogTitle id="form-dialog-title">Add New Hero</DialogTitle>
+                            <DialogContent>
+                                <DialogContentText>Add A New Hero</DialogContentText>
+                                    <HeroForm />
+                                </DialogContent>
+                            <DialogActions>
+                                <Button onClick = {handleDialogClickClose} color="primary">Cancel</Button>
+                                <Button onClick={handleDialogClickClose} color = "primary">Done</Button> 
+                            </DialogActions>
+                        </Dialog>
+                    <a href="https://hero-api-newish.herokuapp.com/signin" className={classes.toolbar_button} target="_blank"><b>Get Your Own Token!</b></a>
                 </Toolbar>   
             </AppBar>
             <MUIDrawer 
@@ -180,7 +213,7 @@ export const Dashboard = withRouter((props:DashProps) => {
                 <main className={clsx(classes.content,{[classes.contentShift]: open})}>
                     {/* div is for spacing */}
                     <div className={classes.drawerHeader} />
-                    <h1>Data table goes here...Does shift?</h1>
+
                     <DataTable/>
                 </main>
         </div>

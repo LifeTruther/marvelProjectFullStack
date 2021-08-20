@@ -1,11 +1,12 @@
 import React from 'react';
-import { makeStyles, createStyles, Theme, useTheme, Typography } from '@material-ui/core';
+import { makeStyles, createStyles, Theme, useTheme, Typography, CssBaseline } from '@material-ui/core';
 import Button from '@material-ui/core/Button';
 import bg_image from '../../assets/images/index-bg-top.jpg';
 import cornericon from '../../assets/images/ironmanicon.png';
 import {flexbox} from '@material-ui/system';
 import { Link, RouteComponentProps, withRouter, Switch, Route } from 'react-router-dom'; 
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
+import { AuthCheck } from 'reactfire';
 
 interface Props{
     title: string;
@@ -18,17 +19,25 @@ export const Home = ( props:Props) => {
 
     return (
         <div className={classes.root}>
+            < CssBaseline />
             {/*New and Updated HTML Code */}
             <nav>
                 <div className={classes.navbar_container}>
                     <ul className={ `${classes.navigation} ${classes.logo_navigation}` }>
                         
+                        <AuthCheck fallback={
+                            <li>
+                                <Link to="/signin" className={classes.nav_a}>Sign In</Link>
+                            </li>
+                        }>
+                        
                         <li>
-                            <Link to="/dashboard" className={classes.nav_a} id="repo">The Repo</Link>
+                            <Link to="/dashboard" className={classes.nav_a}>The Repo</Link>
                         </li>
                         <li>
-                            <Link to="/signin" className={classes.nav_a}><b>Sign In</b></Link>
+                            <Link to="/signin" className={classes.nav_a}>Sign Out</Link>
                         </li>
+                        </AuthCheck>
                     </ul>
                 </div>
             </nav>
