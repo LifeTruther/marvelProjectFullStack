@@ -44,8 +44,9 @@ export const Home = ( props:Props) => {
             <main className={classes.main}>
                 <div className={classes.main_text}>
                     <h1>{ props.title }</h1>
-                    <p>Welcome!</p>
-                    <Button color='default' variant="contained">Find Your Hero!</Button>
+                    <p>Welcome to my first full-stack project. 
+                        <br/>Take a look at the heroes and stories I have made,
+                        <br/>And feel free to add your own!</p>
                 </div>
             </main>
         </div>
