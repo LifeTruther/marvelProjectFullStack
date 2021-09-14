@@ -1,7 +1,7 @@
 # A Hero Repository
 This is a mostly-finished React project.
 
-I hosted the site on Firebase, and it references a database in a flask project that I hosted on Heroku.
+I host the site on Firebase, and it references a database in a flask project that I host on Heroku.
 
 The unfinished part is as follows: I would like the front-end to allow users to view the data, but only edit it if they have their own token.
 
