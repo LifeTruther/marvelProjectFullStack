@@ -1,4 +1,4 @@
-# A Hero Repository: https://a-hero-repository.web.app/
+# A Hero Repository
 
 This is a mostly-finished React project.
 It is a proof-of-concept that allows users to create a 'hero' with class attributes, change those attributes, delete the hero, and view all the 
@@ -13,3 +13,5 @@ in the future.
 The database on Heroku allows users to log in and view their token, so I was thinking to either allow the users to place their token
 into an input form on the repo site, or simply take new user logins from the repo site and automatically create accounts that would use the same
 'current_user_token' strategy I employed with the original flask project.
+
+See it live: https://a-hero-repository.web.app/
